@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
  * word pattern recognition soon.
  *
  * @author DeTK.
- * @version 1.0.0 
+ * @version 1.0.0
  */
 public class detectEnglish
 {
@@ -22,18 +22,18 @@ public class detectEnglish
       System.out.println("Loaded file name: " + dict.getName());
       System.out.println("Loaded file path: " + dict.getAbsolutePath());
     } else {
-      System.out.println("The dictionary file does not exist."); //FileNotFoundException   
+      System.out.println("The dictionary file does not exist."); //FileNotFoundException
     }
    }
    private static List  makeWords(File file){
         File dict = file;
-        try // new loopt thing I found. used to stop FileNotFoundException. 
+        try // new loopt thing I found. used to stop FileNotFoundException.
         {
             String psn = "";
             Scanner reader = new Scanner(dict);
-            List<String> words = new ArrayList<String>();        
+            List<String> words = new ArrayList<String>();
             // while loop
-            while (reader.hasNext()) {          
+            while (reader.hasNext()) {
               psn = reader.next();
               words.add(psn);
             }
@@ -46,7 +46,7 @@ public class detectEnglish
           return null;
         }
     }
-   private static double getEnglishCount(String msg){
+  public static double getEnglishCount(String msg){
        String message = msg.toUpperCase().trim();
        List<String> possibleWords = new ArrayList<String>(Arrays.asList(message.split(" ")));
        if (possibleWords.size() == 0)
@@ -58,15 +58,15 @@ public class detectEnglish
         for(String str: possibleWords)
         {
             if(makeWords(dict).contains(str)){
-               count += 1.0; 
+               count += 1.0;
             }
         }
         return count/(double)possibleWords.size();
         }
     }
-   public static boolean isEnglish(String message){
-    if(getEnglishCount(message) >= .5)
-    {return true;}
-    else{return false;}
+public static boolean isEnglish(String message){
+    if(getEnglishCount(message) >= .75)
+      return true;
+    return false;
     }
 }
